@@ -1,21 +1,18 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <center>
-      <div class="container">
-        <label>Product Name:</label>
-        <input v-model="productName" required />
-      </div>
-      <div>
-        <label>Price:</label>
-
-        <input v-model="price" type="number" required />
-      </div>
-      <div>
-        <label>Description:</label>
-        <textarea v-model="description" required></textarea>
-      </div>
-    </center>
-    <button type="submit">Add Product</button>
+  <form @submit.prevent="submitForm" class="product-form">
+    <div class="form-field">
+      <label>Product Name:</label>
+      <input v-model="productName" required class="input" />
+    </div>
+    <div class="form-field">
+      <label>Price:</label>
+      <input v-model="price" type="number" required class="input" />
+    </div>
+    <div class="form-field">
+      <label>Description:</label>
+      <textarea v-model="description" required class="textarea"></textarea>
+    </div>
+    <button type="submit" class="submit-button">Add Product</button>
   </form>
 </template>
 
@@ -38,6 +35,9 @@ export default {
         description: this.description,
       }
       this.$emit('add-product', product)
+      this.resetForm()
+    },
+    resetForm() {
       this.productName = ''
       this.price = ''
       this.description = ''
@@ -47,34 +47,50 @@ export default {
 </script>
 
 <style scoped>
-/* form { */
-/* display: flex;
+.product-form {
+  display: flex;
   flex-direction: column;
-  justify-content: center; */
-/* margin-bottom: 20px;
-  padding: 30px;
-  text-align: left;
   align-items: center;
-  border: 1px solid black;
-  width: 30%;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
-/* .container {
-  text-align: center;
-} */
 
-/* form {
-  text-align: left;
-  align-items: center;
-  border: 1px solid black;
-  width: 30%;
-} */
-
-div {
+.form-field {
   margin-bottom: 20px;
-  padding: 30px;
-  text-align: left;
-  align-items: center;
-  border: 1px solid black;
-  width: 30%;
+  width: 50%;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border: 1px solid #4db8ff;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #4db8ff;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background: #80c8ff;
 }
 </style>
